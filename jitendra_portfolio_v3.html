@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Jitendra Dhasmana — Amateur vocalist sharing heartfelt Hindi music on YouTube since 2011.">
+<title>Jitendra Dhasmana — Vocalist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,0..100&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   RESET & ROOT
+═══════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #07060A;
+  --bg2:     #0B0A10;
+  --surface: #13101A;
+  --card:    #171326;
+  --gold:    #C48B2E;
+  --gold2:   #E2A64B;
+  --gold3:   #F3CF8A;
+  --cream:   #F3E8D6;
+  --cream2:  #D2C0A3;
+  --muted:   #A6927B;
+  --border:  rgba(226,166,75,0.14);
+  --border2: rgba(226,166,75,0.3);
+  --shadow:  rgba(0,0,0,0.55);
+  --shadow2: rgba(0,0,0,0.38);
+  --focus:   rgba(243,207,138,0.95);
+  --r:       14px;
+  --r-sm:    8px;
+  --font-sans: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-serif: 'Fraunces', ui-serif, Georgia, 'Times New Roman', serif;
+  --scrollY: 0px;
+}
+
+html {
+  scroll-behavior: smooth;
+  background:
+    radial-gradient(1200px 800px at 18% 12%, rgba(226,166,75,0.12) 0%, transparent 60%),
+    radial-gradient(900px 700px at 82% 22%, rgba(143,110,255,0.1) 0%, transparent 58%),
+    radial-gradient(900px 900px at 65% 95%, rgba(226,166,75,0.08) 0%, transparent 55%),
+    linear-gradient(180deg, #07060A 0%, #090710 40%, #07060A 100%);
+}
+
+body {
+  background: transparent;
+  color: var(--cream);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: -10vh;
+  background:
+    radial-gradient(900px 700px at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 65%, rgba(0,0,0,0.78) 100%),
+    radial-gradient(900px 700px at 50% 0%, rgba(226,166,75,0.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Noise grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9000;
+}
+
+img { display: block; max-width: 100%; }
+a  { text-decoration: none; color: inherit; }
+
+::selection { background: rgba(226,166,75,0.35); color: var(--cream); }
+
+*:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.8rem;
+  left: 0.8rem;
+  z-index: 9999;
+  padding: 0.7rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(9,7,16,0.92);
+  border: 1px solid var(--border2);
+  color: var(--cream);
+  transform: translateY(-160%);
+  transition: transform 0.22s ease;
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* ═══════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s cubic-bezier(.22,.68,0,1.2),
+              transform 0.75s cubic-bezier(.22,.68,0,1.2);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* ═══════════════════════════════════════════════
+   NAV  (mobile-first)
+═══════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.5s, border-bottom 0.5s, backdrop-filter 0.5s;
+}
+.nav.scrolled {
+  background: rgba(7,6,10,0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 450;
+  color: var(--gold2);
+  letter-spacing: 0.02em;
+}
+
+.nav-yt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 45%, var(--gold3) 100%);
+  color: #06040A;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.52rem 1.05rem;
+  border-radius: 100px;
+  transition: transform 0.2s, filter 0.25s, box-shadow 0.25s;
+}
+.nav-yt:hover {
+  transform: translateY(-1px);
+  filter: saturate(1.1);
+  box-shadow: 0 14px 34px rgba(226,166,75,0.22);
+}
+.nav-yt svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════════
+   HERO  (mobile-first: centered single column)
+═══════════════════════════════════════════════ */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 1.4rem 6rem;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(700px 500px at 50% 30%, rgba(143,110,255,0.12) 0%, transparent 62%),
+    radial-gradient(500px 420px at 30% 60%, rgba(226,166,75,0.11) 0%, transparent 60%);
+  transform: translateY(calc(var(--scrollY) * 0.03));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.62;
+  mix-blend-mode: screen;
+}
+
+/* Soft ambient glow */
+.hero-glow {
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(226,166,75,0.11) 0%, rgba(226,166,75,0.05) 28%, transparent 68%),
+    radial-gradient(circle, rgba(143,110,255,0.08) 0%, transparent 62%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -58%) translateY(calc(var(--scrollY) * -0.08));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Profile circle */
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1.5px solid var(--border2);
+  box-shadow: 0 0 0 10px rgba(196,139,46,0.055),
+              0 0 70px rgba(196,139,46,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto 2rem;
+  flex-shrink: 0;
+  isolation: isolate;
+}
+.avatar::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      from 215deg,
+      rgba(243,207,138,0.0) 0deg,
+      rgba(243,207,138,0.75) 40deg,
+      rgba(143,110,255,0.45) 110deg,
+      rgba(243,207,138,0.35) 190deg,
+      rgba(243,207,138,0.0) 320deg,
+      rgba(243,207,138,0.0) 360deg
+    );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 12px), #000 calc(100% - 11px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 12px), #000 calc(100% - 11px));
+  opacity: 0.78;
+  z-index: 0;
+  animation: halo-spin 11s linear infinite;
+}
+.avatar::after {
+  content: '';
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 40% 35%, rgba(226,166,75,0.22) 0%, transparent 56%),
+    radial-gradient(circle at 70% 55%, rgba(143,110,255,0.14) 0%, transparent 62%);
+  filter: blur(18px);
+  opacity: 0.6;
+  z-index: 0;
+  transform: translateY(calc(var(--scrollY) * -0.02));
+}
+@keyframes halo-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.avatar-initials {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 350;
+  color: var(--gold2);
+  line-height: 1;
+  position: absolute;
+  z-index: 1;
+}
+.avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.hero > :not(.hero-glow):not(.hero-canvas) {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-label {
+  font-size: 0.67rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.9rem;
+}
+
+.hero-name {
+  font-family: var(--font-serif);
+  font-size: clamp(3.2rem, 14vw, 6.5rem);
+  font-weight: 380;
+  line-height: 1.0;
+  color: var(--cream);
+  margin-bottom: 1.1rem;
+  letter-spacing: -0.01em;
+}
+.hero-name em {
+  font-style: italic;
+  color: var(--gold2);
+  display: block;
+}
+
+.hero-tagline {
+  font-size: clamp(0.88rem, 3vw, 1rem);
+  color: var(--cream2);
+  font-weight: 400;
+  max-width: 340px;
+  margin-bottom: 2.8rem;
+  line-height: 1.7;
+}
+
+.hero-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+  max-width: 260px;
+}
+
+.btn-gold {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 45%, var(--gold3) 100%);
+  color: #06040A;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1.05rem 1.6rem;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.22s, box-shadow 0.25s, filter 0.25s;
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.08);
+  box-shadow: 0 18px 46px rgba(226,166,75,0.22);
+}
+.btn-gold svg { width: 15px; height: 15px; }
+
+.btn-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: rgba(255,255,255,0.02);
+  color: var(--cream2);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 1.6rem;
+  border-radius: 100px;
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, transform 0.2s, background 0.25s, box-shadow 0.25s;
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold2);
+  transform: translateY(-1px);
+  background: rgba(226,166,75,0.06);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.35);
+}
+
+/* Scroll indicator */
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+}
+.scroll-track {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--muted), transparent);
+  animation: pulse-line 2s ease-in-out infinite;
+}
+.scroll-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.5;
+}
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+/* ═══════════════════════════════════════════════
+   STATS  (mobile: horizontal centered)
+═══════════════════════════════════════════════ */
+.stats {
+  padding: 2.8rem 1.4rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(900px 240px at 50% -20%, rgba(226,166,75,0.09) 0%, transparent 70%),
+    rgba(11,10,16,0.68);
+  backdrop-filter: blur(10px);
+}
+.stats-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.stat {
+  text-align: center;
+  padding: 0.5rem 2rem;
+  position: relative;
+}
+.stat + .stat::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 32px;
+  background: var(--border2);
+}
+.stat-n {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 380;
+  color: var(--gold2);
+  line-height: 1;
+  display: block;
+}
+.stat-l {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.3rem;
+  display: block;
+}
+
+/* ═══════════════════════════════════════════════
+   SHARED SECTION STYLES
+═══════════════════════════════════════════════ */
+.section {
+  padding: 5.5rem 1.4rem;
+  scroll-margin-top: 96px;
+  content-visibility: auto;
+  contain-intrinsic-size: 850px;
+}
+.section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.1rem;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.65;
+  flex-shrink: 0;
+}
+
+.section-h {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 380;
+  line-height: 1.15;
+  color: var(--cream);
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.01em;
+}
+.section-h em {
+  font-style: italic;
+  color: var(--gold2);
+}
+
+/* ═══════════════════════════════════════════════
+   VIDEOS SECTION
+═══════════════════════════════════════════════ */
+#videos {
+  background:
+    radial-gradient(950px 520px at 15% 5%, rgba(143,110,255,0.14) 0%, transparent 62%),
+    radial-gradient(750px 520px at 88% 40%, rgba(226,166,75,0.11) 0%, transparent 60%),
+    rgba(11,10,16,0.46);
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.video-card {
+  display: block;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(.22,.68,0,1.2),
+              border-color 0.3s,
+              box-shadow 0.3s,
+              filter 0.25s;
+  position: relative;
+}
+.video-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(650px 320px at 35% 0%, rgba(226,166,75,0.18) 0%, transparent 55%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.video-card:hover {
+  transform: translateY(-5px) scale(1.015);
+  border-color: var(--border2);
+  box-shadow: 0 22px 56px rgba(0,0,0,0.56);
+  filter: saturate(1.03);
+}
+.video-card:hover::before { opacity: 1; }
+.video-card:focus-visible { outline-offset: 6px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .videos-grid { perspective: 900px; }
+  .video-card {
+    transform-style: preserve-3d;
+    --rx: 0deg;
+    --ry: 0deg;
+  }
+  .video-card:hover {
+    transform: translateY(-5px) scale(1.015) rotateX(var(--rx)) rotateY(var(--ry));
+  }
+}
+
+.video-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--surface);
+}
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.video-card:hover .video-thumb img {
+  transform: scale(1.05);
+}
+
+/* Fallback when thumb fails */
+.thumb-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #180E1E, #100B14);
+  font-size: 2.4rem;
+  user-select: none;
+}
+
+/* Play button overlay */
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0);
+  transition: background 0.3s;
+}
+.video-card:hover .video-overlay {
+  background: rgba(0,0,0,0.18);
+}
+.play-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(196,139,46,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.75);
+  transition: opacity 0.3s, transform 0.3s;
+  backdrop-filter: blur(4px);
+}
+.video-card:hover .play-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+.play-btn svg {
+  width: 18px;
+  height: 18px;
+  color: #06040A;
+  margin-left: 2px;
+}
+
+.video-info {
+  padding: 1rem 1.1rem 1.25rem;
+}
+.video-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 420;
+  color: var(--cream);
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
+}
+.video-meta {
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.video-badges {
+  display: flex;
+  gap: 0.45rem;
+  margin-bottom: 0.55rem;
+  flex-wrap: wrap;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.55rem;
+  border-radius: 100px;
+  border: 1px solid var(--border2);
+  background: rgba(196,139,46,0.06);
+  color: var(--gold2);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.badge svg { width: 12px; height: 12px; }
+.badge.playlist {
+  border-color: rgba(196,139,46,0.35);
+  background: rgba(196,139,46,0.09);
+}
+.badge.song {
+  border-color: rgba(196,139,46,0.22);
+}
+
+.thumb-skeleton {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(20,16,24,1) 0%, rgba(28,22,34,1) 35%, rgba(20,16,24,1) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.25s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: -200% 0%; }
+}
+
+.video-card.featured {
+  border-color: rgba(196,139,46,0.22);
+  box-shadow: 0 16px 46px rgba(0,0,0,0.38);
+}
+
+.videos-footer {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════════════════════
+   ABOUT SECTION
+═══════════════════════════════════════════════ */
+#about .about-body p {
+  color: var(--cream2);
+  font-size: 0.97rem;
+  line-height: 1.9;
+  margin-bottom: 1.2rem;
+}
+#about .about-body p strong {
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.pull-quote {
+  margin-top: 2.2rem;
+  padding: 1.6rem 1.6rem 1.6rem 1.8rem;
+  border-left: 2px solid var(--gold);
+  background: rgba(196,139,46,0.04);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+.pull-quote-text {
+  font-family: var(--font-serif);
+  font-size: 1.38rem;
+  font-weight: 350;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.55;
+}
+.pull-quote-attr {
+  margin-top: 0.9rem;
+  font-size: 0.67rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ═══════════════════════════════════════════════
+   CATEGORIES  (horizontal scroll on mobile)
+═══════════════════════════════════════════════ */
+#categories {
+  background: var(--bg2);
+  padding: 4rem 0;
+}
+.categories-head {
+  padding: 0 1.4rem;
+  margin-bottom: 1.5rem;
+}
+.categories-scroll {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding: 0.3rem 1.4rem 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.categories-scroll::-webkit-scrollbar { display: none; }
+
+.cat {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.6rem 1.1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.78rem;
+  color: var(--cream2);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+  white-space: nowrap;
+}
+.cat:hover, .cat.active {
+  border-color: var(--gold);
+  color: var(--gold2);
+  background: rgba(196,139,46,0.06);
+}
+.cat-pip {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex-shrink: 0;
+  transition: background 0.25s;
+}
+.cat:hover .cat-pip, .cat.active .cat-pip { background: var(--gold); }
+
+/* ═══════════════════════════════════════════════
+   CONNECT / SOCIAL
+═══════════════════════════════════════════════ */
+#connect {
+  text-align: center;
+}
+#connect .eyebrow {
+  justify-content: center;
+}
+#connect .eyebrow::before { display: none; }
+
+.connect-tagline {
+  font-size: 0.92rem;
+  color: var(--muted);
+  max-width: 360px;
+  margin: -1rem auto 2.5rem;
+  line-height: 1.7;
+}
+
+.socials {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.social-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.05rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  width: 100%;
+  max-width: 360px;
+  color: var(--cream2);
+  transition: border-color 0.25s, transform 0.22s, color 0.25s;
+}
+.social-card:hover {
+  transform: translateY(-2px);
+  color: var(--cream);
+  border-color: var(--border2);
+}
+.social-card.yt-card { border-color: rgba(255,70,50,0.18); }
+.social-card.yt-card:hover { border-color: rgba(255,70,50,0.42); }
+
+.social-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.si-yt   { background: rgba(255,70,50,0.1);   color: #FF4632; }
+.si-mail { background: rgba(196,139,46,0.1);   color: var(--gold2); }
+.si-fb   { background: rgba(70,105,190,0.12);  color: #7090D8; }
+.si-wa   { background: rgba(37,211,102,0.1);   color: #25D366; }
+.social-icon-wrap svg { width: 19px; height: 19px; }
+
+.social-info { text-align: left; }
+.social-platform {
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.15rem;
+}
+.social-handle { font-size: 0.88rem; }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  padding: 1.8rem 1.4rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+}
+.footer-name {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 450;
+  color: var(--gold2);
+}
+.footer-copy {
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* ═══════════════════════════════════════════════
+   DESKTOP — 640px+
+═══════════════════════════════════════════════ */
+@media (min-width: 640px) {
+  .hero-btns {
+    flex-direction: row;
+    max-width: none;
+    justify-content: center;
+  }
+
+  .socials { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+
+  footer { flex-direction: row; justify-content: space-between; max-width: 1080px; margin: 0 auto; }
+}
+
+/* ═══════════════════════════════════════════════
+   DESKTOP — 768px+
+═══════════════════════════════════════════════ */
+@media (min-width: 768px) {
+  .nav { padding: 1.2rem 3rem; }
+
+  .section { padding: 7rem 2.5rem; }
+
+  .categories-head    { padding: 0 2.5rem; }
+  .categories-scroll  { padding: 0.3rem 2.5rem 1rem; }
+
+  .videos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .video-card.featured { grid-column: 1 / -1; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4.5rem;
+    align-items: start;
+  }
+
+  .stat-n { font-size: 3rem; }
+  .stat { padding: 0.5rem 2.5rem; }
+}
+
+/* ═══════════════════════════════════════════════
+   DESKTOP — 1024px+
+═══════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .nav { padding: 1.3rem 4.5rem; }
+
+  .avatar { width: 140px; height: 140px; }
+  .avatar-initials { font-size: 3rem; }
+
+  .videos-grid { grid-template-columns: repeat(3, 1fr); }
+  .video-card.featured { grid-column: span 2; }
+
+  .stat { padding: 0.5rem 3.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .scroll-track { animation: none; }
+  .thumb-skeleton { animation: none; }
+  .video-card, .btn-gold, .btn-outline, .nav-yt { transition: none; }
+  .hero::before { transform: none; }
+  .hero-glow { transform: translate(-50%, -58%); }
+  .hero-canvas { display: none; }
+  .avatar::before { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+<nav class="nav" id="nav" aria-label="Primary">
+  <a href="#top" class="nav-logo">Jitendra Dhasmana</a>
+  <a href="https://www.youtube.com/@JitendraDhasmana" target="_blank" rel="noopener" class="nav-yt">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M23.5 6.2a3.02 3.02 0 00-2.12-2.13C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.38.47A3.02 3.02 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3.02 3.02 0 002.12 2.13C4.5 20.4 12 20.4 12 20.4s7.5 0 9.38-.47a3.02 3.02 0 002.12-2.13C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.27 3.6-6.27 3.6z"/>
+    </svg>
+    YouTube
+  </a>
+</nav>
+
+<main id="main">
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+
+  <!-- Profile photo — replace src with actual URL; initials show as fallback -->
+  <div class="avatar reveal">
+    <span class="avatar-initials">JD</span>
+    <img
+      src="dp.jpg"
+      alt="Jitendra Dhasmana"
+      loading="lazy"
+      decoding="async"
+      onerror="this.remove()"
+    >
+  </div>
+
+  <p class="hero-label reveal" style="transition-delay:.08s">Vocalist · India · Since 2011</p>
+
+  <h1 class="hero-name reveal" style="transition-delay:.16s">
+    Jitendra<br><em>Dhasmana</em>
+  </h1>
+
+  <p class="hero-tagline reveal" style="transition-delay:.24s">
+    Singing the golden era of Hindi music with honesty, nostalgia, and heart.
+  </p>
+
+  <div class="hero-btns reveal" style="transition-delay:.32s">
+    <a href="https://www.youtube.com/@JitendraDhasmana" target="_blank" rel="noopener" class="btn-gold">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M23.5 6.2a3.02 3.02 0 00-2.12-2.13C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.38.47A3.02 3.02 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3.02 3.02 0 002.12 2.13C4.5 20.4 12 20.4 12 20.4s7.5 0 9.38-.47a3.02 3.02 0 002.12-2.13C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.27 3.6-6.27 3.6z"/>
+      </svg>
+      Watch on YouTube
+    </a>
+    <a href="#videos" class="btn-outline">View Videos ↓</a>
+  </div>
+
+  <div class="hero-scroll-hint reveal" style="transition-delay:.5s" aria-hidden="true">
+    <div class="scroll-track"></div>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     STATS
+══════════════════════════════════════════ -->
+<div class="stats reveal">
+  <div class="stats-row">
+    <div class="stat">
+      <span class="stat-n">445</span>
+      <span class="stat-l">Subscribers</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">110</span>
+      <span class="stat-l">Videos</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">168K</span>
+      <span class="stat-l">Total Views</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     VIDEOS
+══════════════════════════════════════════ -->
+<section class="section" id="videos">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Featured</p>
+    <h2 class="section-h reveal" style="transition-delay:.06s">Featured <em>Songs</em> &amp; Playlist</h2>
+
+    <div class="videos-grid" id="videosGrid"></div>
+
+    <div class="videos-footer reveal">
+      <a href="https://www.youtube.com/playlist?list=PLBRcd1h54gvA4olOaURrY3kin5v5SdCNk"
+         target="_blank" rel="noopener"
+         class="btn-outline">
+        Mukesh Playlist →
+      </a>
+      <a href="https://www.youtube.com/@JitendraDhasmana/videos"
+         target="_blank" rel="noopener"
+         class="btn-outline">
+        All Videos →
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════ -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+
+      <div class="about-body">
+        <p class="eyebrow reveal">About</p>
+        <h2 class="section-h reveal" style="transition-delay:.06s">
+          A voice shaped<br>by <em>pure devotion</em>
+        </h2>
+
+        <p class="reveal" style="transition-delay:.1s">
+          Jitendra Dhasmana is a devoted amateur vocalist from India, channeling a lifetime of love for Hindi music into heartfelt performances that have quietly touched <strong>hundreds of thousands of listeners</strong> around the world.
+        </p>
+        <p class="reveal" style="transition-delay:.18s">
+          His channel is a tribute to the <strong>golden era of Bollywood</strong> — a sanctuary of nostalgia, joy, and honest artistry, entirely free from commercial ambition. Every recording is an act of passion, not performance.
+        </p>
+        <p class="reveal" style="transition-delay:.26s">
+          Over 13 years and 110 videos, he has built something rare: a deeply personal musical archive, open to the world — and always open to feedback.
+        </p>
+      </div>
+
+      <div class="reveal" style="transition-delay:.2s">
+        <div class="pull-quote">
+          <p class="pull-quote-text">
+            "I started this channel because of my passion for music — and in the search for suggestions to improve my singing."
+          </p>
+          <p class="pull-quote-attr">— Jitendra Dhasmana</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     CATEGORIES
+══════════════════════════════════════════ -->
+<section id="categories">
+  <div class="categories-head">
+    <p class="eyebrow reveal">Music Style</p>
+  </div>
+  <div class="categories-scroll reveal" style="transition-delay:.08s">
+    <span class="cat active"><span class="cat-pip"></span>All Songs</span>
+    <a href="https://www.youtube.com/playlist?list=PLBRcd1h54gvA4olOaURrY3kin5v5SdCNk" target="_blank" rel="noopener" class="cat">
+      <span class="cat-pip"></span>Mukesh
+    </a>
+    <span class="cat"><span class="cat-pip"></span>Kishore Kumar</span>
+    <span class="cat"><span class="cat-pip"></span>Rafi Sahab</span>
+    <span class="cat"><span class="cat-pip"></span>Old Classics</span>
+    <span class="cat"><span class="cat-pip"></span>Romantic</span>
+    <span class="cat"><span class="cat-pip"></span>Covers</span>
+    <span class="cat"><span class="cat-pip"></span>Live</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     CONNECT
+══════════════════════════════════════════ -->
+<section class="section" id="connect">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Connect</p>
+    <h2 class="section-h reveal" style="transition-delay:.06s; text-align:center">
+      Get in <em>Touch</em>
+    </h2>
+    <p class="connect-tagline reveal" style="transition-delay:.12s">
+      Share feedback, song suggestions, or simply your love for Hindi music.
+    </p>
+
+    <div class="socials reveal" style="transition-delay:.18s">
+
+      <a href="https://www.youtube.com/@JitendraDhasmana"
+         target="_blank" rel="noopener"
+         class="social-card yt-card">
+        <div class="social-icon-wrap si-yt">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-label="YouTube">
+            <path d="M23.5 6.2a3.02 3.02 0 00-2.12-2.13C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.38.47A3.02 3.02 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3.02 3.02 0 002.12 2.13C4.5 20.4 12 20.4 12 20.4s7.5 0 9.38-.47a3.02 3.02 0 002.12-2.13C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.27 3.6-6.27 3.6z"/>
+          </svg>
+        </div>
+        <div class="social-info">
+          <span class="social-platform">YouTube</span>
+          <span class="social-handle">@JitendraDhasmana</span>
+        </div>
+      </a>
+
+      <a href="mailto:jitendra.dhasmana@gmail.com" class="social-card">
+        <div class="social-icon-wrap si-mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-label="Email">
+            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <div class="social-info">
+          <span class="social-platform">Email</span>
+          <span class="social-handle">jitendra.dhasmana@gmail.com</span>
+        </div>
+      </a>
+
+      <a href="https://facebook.com/jitendra.dhasmana"
+         target="_blank" rel="noopener"
+         class="social-card">
+        <div class="social-icon-wrap si-fb">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-label="Facebook">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+          </svg>
+        </div>
+        <div class="social-info">
+          <span class="social-platform">Facebook</span>
+          <span class="social-handle">jitendra.dhasmana</span>
+        </div>
+      </a>
+
+      <a href="https://wa.me/919916833258"
+         target="_blank" rel="noopener"
+         class="social-card">
+        <div class="social-icon-wrap si-wa">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-label="WhatsApp">
+            <path d="M17.47 14.38c-.28-.14-1.63-.8-1.88-.9-.26-.09-.44-.14-.63.14-.19.27-.72.9-.88 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.39-1.66-1.56-1.94-.16-.27-.02-.42.12-.56.13-.13.28-.33.43-.5.14-.17.19-.28.28-.47.1-.19.05-.36-.02-.5-.07-.14-.63-1.52-.87-2.08-.23-.54-.46-.47-.63-.48-.16 0-.35-.02-.54-.02s-.5.07-.76.36c-.26.28-1 .98-1 2.38 0 1.4 1.02 2.76 1.17 2.95.14.19 2.02 3.08 4.88 4.32.68.29 1.21.47 1.63.6.68.22 1.3.19 1.8.12.54-.08 1.68-.69 1.91-1.35.24-.67.24-1.24.17-1.36-.07-.12-.25-.19-.54-.33z"/>
+            <path d="M12.05 2C6.49 2 2 6.49 2 12.05c0 1.84.5 3.56 1.36 5.04L2 22l5.06-1.33A10 10 0 0012.05 22C17.61 22 22 17.51 22 11.95 22 6.4 17.61 2 12.05 2zm0 18.15a8.28 8.28 0 01-4.22-1.16l-.3-.18-3.14.82.84-3.07-.2-.32A8.3 8.3 0 013.84 12c0-4.53 3.68-8.22 8.21-8.22 4.53 0 8.22 3.69 8.22 8.22 0 4.53-3.69 8.15-8.22 8.15z"/>
+          </svg>
+        </div>
+        <div class="social-info">
+          <span class="social-platform">WhatsApp</span>
+          <span class="social-handle">+91 99168 33258</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <span class="footer-name">Jitendra Dhasmana</span>
+  <span class="footer-copy">© 2025 · India · Hobby &amp; Entertainment</span>
+</footer>
+
+
+<!-- ══════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════ -->
+<script>
+// — Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let io = null;
+if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+  io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io?.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io?.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+}
+
+// — Fire hero reveals immediately after paint
+if (!prefersReducedMotion) {
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('in'));
+    }, 80);
+  });
+}
+
+// — Category active state
+document.querySelectorAll('.cat').forEach(tag => {
+  tag.addEventListener('click', () => {
+    document.querySelectorAll('.cat').forEach(t => t.classList.remove('active'));
+    tag.classList.add('active');
+  });
+});
+
+const featuredItems = [
+  {
+    kind: 'playlist',
+    url: 'https://www.youtube.com/playlist?list=PLBRcd1h54gvA4olOaURrY3kin5v5SdCNk',
+    title: 'Mukesh all time favorites by me',
+    meta: 'Curated playlist'
+  },
+  {
+    kind: 'song',
+    url: 'https://www.youtube.com/watch?v=Njl7ukvSIKo',
+    title: 'Zindagi Ka Safar',
+    meta: 'Song cover'
+  },
+  {
+    kind: 'song',
+    url: 'https://www.youtube.com/watch?v=rLiionR-rTw',
+    title: 'Dil Kya Kare Jab Kisi Se',
+    meta: 'Song cover'
+  },
+  {
+    kind: 'song',
+    url: 'https://www.youtube.com/watch?v=oV8WMFFHVcw',
+    title: 'Saanson Ki Zarurat Hai Jaise',
+    meta: 'Song cover'
+  },
+  {
+    kind: 'song',
+    url: 'https://www.youtube.com/watch?v=daHc0zcWHLw',
+    title: 'Kahin Door Jab Din Dhal Jaye',
+    meta: 'Song cover'
+  },
+  {
+    kind: 'song',
+    url: 'https://www.youtube.com/watch?v=DdWU_wI5qG8',
+    title: 'Pal Pal Dil Ke Paas Tum Rehti Ho',
+    meta: 'Song cover'
+  }
+];
+
+const youtubeCacheKey = (url) => `yt_oembed_${url}`;
+const getVideoId = (url) => {
+  try {
+    const u = new URL(url);
+    if (u.hostname.includes('youtu.be')) return u.pathname.replace('/', '') || null;
+    if (u.pathname.startsWith('/shorts/')) return u.pathname.split('/')[2] || null;
+    return u.searchParams.get('v');
+  } catch {
+    return null;
+  }
+};
+const fallbackThumb = (url) => {
+  const id = getVideoId(url);
+  if (!id) return null;
+  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+};
+const fetchOEmbed = async (url) => {
+  const cached = sessionStorage.getItem(youtubeCacheKey(url));
+  if (cached) return JSON.parse(cached);
+  const endpoint = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
+  const res = await fetch(endpoint, { method: 'GET' });
+  if (!res.ok) throw new Error(`oEmbed failed: ${res.status}`);
+  const data = await res.json();
+  sessionStorage.setItem(youtubeCacheKey(url), JSON.stringify(data));
+  return data;
+};
+
+const iconPlay = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>`;
+const iconList = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 6h14v2H4V6zm0 5h10v2H4v-2zm0 5h14v2H4v-2z"/></svg>`;
+
+const supportsFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+const attachTilt = (card) => {
+  if (prefersReducedMotion || !supportsFinePointer) return;
+  if (!card) return;
+
+  let raf = 0;
+  const reset = () => {
+    card.style.setProperty('--rx', '0deg');
+    card.style.setProperty('--ry', '0deg');
+  };
+  reset();
+
+  card.addEventListener('pointerleave', () => reset(), { passive: true });
+  card.addEventListener('pointermove', (e) => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top) / r.height;
+      const ry = (px - 0.5) * 7;
+      const rx = (0.5 - py) * 6;
+      card.style.setProperty('--rx', `${rx.toFixed(2)}deg`);
+      card.style.setProperty('--ry', `${ry.toFixed(2)}deg`);
+    });
+  }, { passive: true });
+};
+
+const createCard = (item, idx) => {
+  const a = document.createElement('a');
+  a.href = item.url;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  a.className = `video-card reveal${item.kind === 'playlist' ? ' featured' : ''}`;
+  a.style.transitionDelay = `${Math.min(0.42, idx * 0.06)}s`;
+  a.dataset.url = item.url;
+
+  a.innerHTML = `
+    <div class="video-thumb">
+      <div class="thumb-skeleton" aria-hidden="true"></div>
+      <div class="video-overlay">
+        <div class="play-btn">${iconPlay}</div>
+      </div>
+    </div>
+    <div class="video-info">
+      <div class="video-badges">
+        <span class="badge ${item.kind}">${item.kind === 'playlist' ? iconList : iconPlay}${item.kind}</span>
+      </div>
+      <p class="video-title">${item.title}</p>
+      <p class="video-meta">${item.meta || ''}</p>
+    </div>
+  `;
+
+  return a;
+};
+
+const applyThumb = (card, thumbUrl, alt) => {
+  const thumbWrap = card.querySelector('.video-thumb');
+  if (!thumbWrap) return;
+  const img = document.createElement('img');
+  img.src = thumbUrl;
+  img.alt = alt || '';
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.referrerPolicy = 'no-referrer';
+  img.onerror = () => { thumbWrap.innerHTML = `<div class="thumb-fallback">♪</div>`; };
+  const sk = thumbWrap.querySelector('.thumb-skeleton');
+  if (sk) sk.remove();
+  thumbWrap.insertBefore(img, thumbWrap.firstChild);
+};
+
+const hydrateCards = async () => {
+  const grid = document.getElementById('videosGrid');
+  if (!grid) return;
+
+  featuredItems.forEach((item, idx) => {
+    const card = createCard(item, idx);
+    grid.appendChild(card);
+    if (io) io.observe(card);
+    else card.classList.add('in');
+    attachTilt(card);
+
+    const fallback = fallbackThumb(item.url);
+    if (fallback) applyThumb(card, fallback, item.title);
+  });
+
+  await Promise.allSettled(
+    Array.from(grid.querySelectorAll('.video-card')).map(async (card) => {
+      const url = card.dataset.url;
+      if (!url) return;
+      try {
+        const data = await fetchOEmbed(url);
+
+        const titleEl = card.querySelector('.video-title');
+        if (titleEl && data?.title) titleEl.textContent = data.title;
+
+        const thumbUrl = data?.thumbnail_url;
+        if (thumbUrl) applyThumb(card, thumbUrl, data.title || '');
+      } catch {
+        const thumbWrap = card.querySelector('.video-thumb');
+        const hasImg = !!thumbWrap?.querySelector('img');
+        const hasFallback = !!thumbWrap?.querySelector('.thumb-fallback');
+        if (thumbWrap && !hasImg && !hasFallback) thumbWrap.innerHTML = `<div class="thumb-fallback">♪</div>`;
+      }
+    })
+  );
+};
+
+hydrateCards();
+
+let parallaxRaf = 0;
+const applyParallax = () => {
+  parallaxRaf = 0;
+  document.documentElement.style.setProperty('--scrollY', `${window.scrollY}px`);
+};
+if (!prefersReducedMotion) {
+  applyParallax();
+  window.addEventListener('scroll', () => {
+    if (parallaxRaf) return;
+    parallaxRaf = requestAnimationFrame(applyParallax);
+  }, { passive: true });
+}
+
+const initHeroCanvas = () => {
+  if (prefersReducedMotion) return;
+  const canvas = document.getElementById('heroCanvas');
+  const hero = document.querySelector('.hero');
+  if (!canvas || !hero) return;
+
+  const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
+  if (!ctx) return;
+
+  const pointer = { x: 0, y: 0, active: false };
+  const colors = [
+    { r: 226, g: 166, b: 75 },
+    { r: 243, g: 207, b: 138 },
+    { r: 143, g: 110, b: 255 }
+  ];
+
+  let w = 0;
+  let h = 0;
+  let dpr = 1;
+  let particles = [];
+  let raf = 0;
+
+  const resize = () => {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    w = Math.max(1, canvas.clientWidth);
+    h = Math.max(1, canvas.clientHeight);
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const base = Math.round((w * h) / 24000);
+    const count = Math.max(34, Math.min(64, base));
+    particles = Array.from({ length: count }, () => {
+      const speed = 0.18 + Math.random() * 0.32;
+      const angle = Math.random() * Math.PI * 2;
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        r: 1.2 + Math.random() * 2.4,
+        a: 0.08 + Math.random() * 0.16,
+        c: colors[Math.floor(Math.random() * colors.length)]
+      };
+    });
+  };
+
+  const draw = () => {
+    raf = 0;
+    ctx.clearRect(0, 0, w, h);
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.shadowBlur = 14;
+    ctx.shadowColor = 'rgba(226,166,75,0.14)';
+
+    const t = performance.now() * 0.001;
+    const driftX = Math.sin(t * 0.45) * 0.08;
+    const driftY = Math.cos(t * 0.38) * 0.08;
+
+    for (const p of particles) {
+      if (pointer.active) {
+        const dx = pointer.x - p.x;
+        const dy = pointer.y - p.y;
+        const dist = Math.hypot(dx, dy) || 1;
+        const pull = Math.min(0.028, 0.9 / dist);
+        p.vx += (dx / dist) * pull;
+        p.vy += (dy / dist) * pull;
+      }
+
+      p.vx = Math.max(-0.75, Math.min(0.75, p.vx * 0.992 + driftX));
+      p.vy = Math.max(-0.75, Math.min(0.75, p.vy * 0.992 + driftY));
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < -30) p.x = w + 30;
+      if (p.x > w + 30) p.x = -30;
+      if (p.y < -30) p.y = h + 30;
+      if (p.y > h + 30) p.y = -30;
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${p.c.r}, ${p.c.g}, ${p.c.b}, ${p.a.toFixed(3)})`;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  };
+
+  const loop = () => {
+    if (document.hidden) return;
+    draw();
+    raf = requestAnimationFrame(loop);
+  };
+
+  hero.addEventListener('pointermove', (e) => {
+    const r = hero.getBoundingClientRect();
+    pointer.active = true;
+    pointer.x = e.clientX - r.left;
+    pointer.y = e.clientY - r.top;
+  }, { passive: true });
+  hero.addEventListener('pointerleave', () => {
+    pointer.active = false;
+  }, { passive: true });
+
+  const onVis = () => {
+    if (document.hidden) {
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+      return;
+    }
+    if (!raf) raf = requestAnimationFrame(loop);
+  };
+
+  window.addEventListener('resize', resize, { passive: true });
+  document.addEventListener('visibilitychange', onVis);
+
+  resize();
+  onVis();
+};
+
+initHeroCanvas();
+</script>
+
+</body>
+</html>
